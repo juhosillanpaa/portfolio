@@ -1,0 +1,11 @@
+.Skills{
+    background-color: rgb(200,200,200);
+    justify-content: center;
+}
+
+.Skills-box{
+    
+    display:inline-flex;
+    flex-direction: row;
+    border: 1px solid black;
+}

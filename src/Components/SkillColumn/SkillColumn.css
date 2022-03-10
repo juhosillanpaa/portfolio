@@ -1,0 +1,8 @@
+.SkillColumn{
+    display:flex;
+    padding: 1em;
+    
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}

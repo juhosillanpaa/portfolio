@@ -1,0 +1,16 @@
+* {    /*normalize shows white space at the top of page, this fixes it*/
+    /*overflow:auto; /* or auto */
+}
+body {
+    /*overflow: hidden;*/
+}
+
+
+.Base{
+    background-color: rgb(240,240,240);
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    /*overflow: hidden;*/
+}

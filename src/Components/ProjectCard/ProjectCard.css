@@ -1,0 +1,101 @@
+.ProjectCard{
+    width:500px;
+    height: 600px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color:white;
+    position: relative;
+    padding:2em;
+    text-align: left;
+    box-sizing: border-box;
+    z-index: 1;
+    margin: 1.5em;
+    overflow: hidden;
+}
+.ProjectCard-overlay{
+    display:block;
+    width:500px;
+    height:0px;
+    position:absolute;
+    top:0px;
+    left:0px;
+    background-color: rgba(0,0,0,0.8);
+    z-index:-1;
+}
+.ProjectCard-description{
+    display:none;
+}
+
+.ProjectCard-btn{
+    position: absolute;
+    top: 300px;
+    left: -100px;
+    display: inline-block;
+    padding: 10px 15px;
+    border: 1px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.ProjectCard:hover .ProjectCard-description{
+    display:block;  
+}
+
+@keyframes expand {  /* expand the overlay from top to down*/
+    from {
+        height:0px;
+    }
+    to {
+        height:600px;
+    }
+}
+@keyframes contract {   /*remove the overlay by sliding it to bottom */
+    from {
+        top:0px;
+        height: 600px;
+    }
+    to {
+        top: 600px;
+        height:600px;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        left: -100px;
+    }
+    to {
+        left: 50px;
+    }
+}
+@keyframes slideOut {
+    from {
+        left: 50px;
+    }
+    to {
+        left: -100px;
+    }
+}
+
+@keyframes slideBounce{
+    0% { left: 50px; }
+    50% { left: 40px; }
+    100% { left:50px; }
+}
+
+.ProjectCard:hover .ProjectCard-btn{
+    animation: slideIn 0.3s linear, slideBounce 0.1s ease-out 0.3s 1 normal forwards;
+}
+
+.ProjectCard:hover > .ProjectCard-overlay{
+   animation-name: expand;
+   animation-duration: 0.5s;
+   animation-fill-mode: forwards;
+}
+
+.ProjectCard-overlay.out{
+    animation: contract 0.5s;
+}
+.ProjectCard-btn.out{
+    animation: slideOut 0.3s;
+}

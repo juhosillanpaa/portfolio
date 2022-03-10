@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react'
+import 'normalize.css'
+import './Styles/main.css'
+import Landing from './Components/Landing/Landing'
+import Description from './Components/Description/Description'
+import Skills from './Components/Skills/Skills'
+import Work from './Components/Work/Work'
+import Footer from './Components/Footer/Footer'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = (props) => {
+
+	
+
+  	return (
+		<div className = 'Base' >
+			<Landing />
+			<Description />
+			<Skills />
+			<Work />
+			<Footer />
+		</div>
+	)
 }
-
-export default App;
+export default App
