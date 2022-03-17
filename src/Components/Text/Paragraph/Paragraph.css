@@ -1,4 +1,7 @@
-.Paragrasph-text{
+.Paragraph-text{
     font-weight: 400;
     font-family:Arial, Helvetica, sans-serif;
+    color: white;
+    margin: 0px;
+    padding: 5px;
 }

@@ -1,5 +1,9 @@
 .Title-text{
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 600;
-    color: #131313;
+    color: white;
+}
+
+.SubTitle-text{
+    color: white;
 }

@@ -20,7 +20,9 @@ const Canvas = ({
         let sceneUpdated
 
         const render = () => {
+            //console.log('rendering')
             sceneUpdated = update()
+            //console.log('sceneupdated; ', sceneUpdated)
             if (sceneUpdated){
                 draw(context)
             }
@@ -29,7 +31,6 @@ const Canvas = ({
         render()
         
         return () => {
-            console.log('cancelling')
             window.cancelAnimationFrame(animationFrameId)
         }
     },[draw, ready, update, width, height])

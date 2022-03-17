@@ -3,14 +3,36 @@
 }
 body {
     /*overflow: hidden;*/
+    background-color: rgb(2, 2, 2);
 }
 
 
 .Base{
-    background-color: rgb(240,240,240);
     text-align: center;
     padding: 0px;
     margin: 0px;
     width: 100%;
-    /*overflow: hidden;*/
+}
+
+.FullPage-Slide{
+    position: relative;
+    height: 100vh;
+    width: 100%;
+}
+.FullPage-Container{
+    position:absolute;
+    top:0px;
+    left:0px;
+    height: 100%;
+    width: 100%;
+
+
+}
+
+#baseDIV{
+    position:relative;
+}
+.hiddenCanvas{
+    /* the hidden canvas class for getting text points */
+    display:none;
 }

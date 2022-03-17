@@ -1,21 +1,20 @@
 import {
     vector_add,
-    random_n,
-    addNoise,
+    distance,
     get_unit_vector,
     get_free_direction_vector,
-    get_noised_unit_direction_vector,
     checkForBounces
 } from './vector_math.js'
 
 const gravity = 0.5
 const CLOSE_D = 0.05
 
-const gravity_r = 0.01
+const gravity_r = 0.02
 const gravity_n = 20
 
-
-
+const BLUE = 'rgb(79,134,139)'
+const WHITE = 'rgb(255,255,255)'
+const W_STROKE = 'rgba(255,255,255,0.5)'
 
 const calculateGravityForceValue = (distance, mode) => {
     if (mode == 'reverse'){
@@ -61,6 +60,11 @@ class Point {
         this.stop = false
         this.iter = 0
         this.active = true
+        this.orbitting = false
+        this.orbitPoint = [0,0]
+        this.orbitAngle = 0
+        this.orbitR = 0
+        this.connected = []
     }   
     activate(){
         this.active = true
@@ -75,16 +79,41 @@ class Point {
     slowVelocity(){
         this.velocity = this.velocity * 0.95
     }
+    startOrbitting(point, angle, radius){
+        this.orbitting = true
+        this.orbitPoint = point
+        this.orbitAngle = angle
+        this.orbitR = radius
+    }
+    stopOrbitting(){
+        this.orbitting = false
+    }
+    setVelocity(velocity){
+        this.velocity = velocity
+    }
+    connectTo(connected){
+        this.connected = connected
+    }
 
     draw(ctx) {
-        ctx.fillStyle = this.color
-        ctx.strokeStyle= this.color
+   
+        let color = this.stop ? WHITE : this.color
+        ctx.fillStyle = color
+        ctx.strokeStyle= color
         ctx.fillRect(this.x, this.y, this.size, this.size)
         ctx.beginPath()
         ctx.moveTo(this.x, this.y)
         this.trail.forEach(pos => {
             ctx.lineTo(pos[0], pos[1])
         })
+        ctx.stroke()
+    }
+    drawConnection(ctx, point){
+        
+        ctx.strokeStyle = W_STROKE
+        ctx.beginPath()
+        ctx.moveTo(this.x, this.y)
+        ctx.lineTo(point.x, point.y)
         ctx.stroke()
     }
 
@@ -120,12 +149,24 @@ class Point {
         }
 
     }
+    updateOrbitPosition(){
+        //return
+        let d_angle = this.velocity / this.orbitR
+        let rad = this.orbitAngle + d_angle      
+        this.x = this.orbitPoint[0] + this.orbitR * Math.cos(rad)
+        this.y = this.orbitPoint[1] + this.orbitR * Math.sin(rad)
+        this.orbitAngle = rad
+    }
 
 
     updatePosition(width, height){
         //Calculate the new direction vector for the point
         if (this.stop){
             this.fadeTrail()
+            return
+        }
+        if (this.orbitting){
+            this.updateOrbitPosition()
             return
         }
 

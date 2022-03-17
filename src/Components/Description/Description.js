@@ -3,12 +3,25 @@ import './Description.css'
 import {Title, Paragraph} from '../Text'
 
 const Description = (props) => {
+    const text = [
+        'asasdasda',
+        'asdasdasd'
+    ]
+
+
+
+
     return (
         <div className = 'Description'>
-            <Title text = "Who am I?" />
-            <Paragraph
-                text = {"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam nec risus eleifend, efficitur metus sed, porta ex. Integer aliquam erat consequat elit pulvinar tincidunt. Maecenas vitae quam lobortis, imperdiet leo id, faucibus justo."}
-            />
+            {
+                text.map((line, index) => (
+                    <Paragraph
+                        key = {index}
+                        text = {line}
+                    />
+                ))
+            }
+            
          
         </div>
     )
