@@ -3,8 +3,10 @@ import Description from '../Description/Description'
 import './Me.css'
 import { Paragraph } from '../Text'
 import hero_image from '../../images/omakuva/yellow_cropped.png'
+import Contact from './Contact'
 
-const Me = () => {
+
+const Me = ({config}) => {
     const text = [
         "I am a developer.",
         "",
@@ -18,12 +20,16 @@ const Me = () => {
         "",
         "Thank you for your interest!"
     ]
+    
 
     return (
         <div className='FullPage-Slide'>
            <div className='FullPage-Container'>
                <div className='Me'>
-                   <img src = {hero_image} className = 'Me-hero-image' />
+
+                   <img src = {hero_image} className = 'Me-hero-image'
+                        width = {config.imageW} height = {config.imageH}
+                   />
                    <div className='Me-text-container'>
                         {
                             text.map((row, index) => 
@@ -32,6 +38,8 @@ const Me = () => {
                                 </div>
                             )
                         }
+                        <Contact />
+
                    </div>
              
                </div>

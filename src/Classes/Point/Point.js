@@ -133,7 +133,9 @@ class Point {
         let color = this.color
         ctx.fillStyle = color
         ctx.strokeStyle= color
-        ctx.fillRect(this.x, this.y, this.size, this.size)
+        let x = Math.round(this.x)
+        let y = Math.round(this.y)
+        ctx.fillRect(x, y, this.size, this.size)
     }
 
     drawConnection(ctx, point){

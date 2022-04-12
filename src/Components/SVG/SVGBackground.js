@@ -14,13 +14,13 @@ const SVGBackground = ({ fullHeight, windowWidth, windowHeight, paddings }) => {
     let color = 'rgba(255,255,255,0.6)'
 
     const createSkillsLines = (wh, ww) => {
-        let p = 20
+        let p = paddings.skillBoxMargin
         let y0 = 2 * wh + wh * paddings.description_top + paddings.descH - p
         let y1 = y0 + 2*p + paddings.skillBoxH            
         let box_w = 4 * paddings.skillBoxW     
         let x0 = (ww - box_w) / 2 - p
         let x1 = ww - x0 + p
-        let d = 100
+        let d = paddings.skillBoxOffset
         let lines = [
             {x0: x0 - d, x1: x1 + d, y0: y0, y1:y0 },
             {x0: x0 - d, x1: x1 + d, y0: y1, y1: y1 },
@@ -31,6 +31,8 @@ const SVGBackground = ({ fullHeight, windowWidth, windowHeight, paddings }) => {
     }
 
     const createHeroFrame = (wh, ww) => {
+        let extra = paddings.heroframe_line
+
         let x0 = ww * ( 1 - paddings.image_right) - paddings.imageW
         let x1 = ww * ( 1 - paddings.image_right)
         let y0 = wh + wh / 2 - paddings.imageH / 2
@@ -38,29 +40,30 @@ const SVGBackground = ({ fullHeight, windowWidth, windowHeight, paddings }) => {
 
         let lines = []
         lines.push({    //bottom line
-            x0: x0 - 300, x1: x1 + 100,
+            x0: x0 - extra * 2, x1: x1 + extra,
             y0: y1+1 , y1: y1+1 
         })
         lines.push({    // right line ( taller )
             x0: x1, x1: x1 ,
-            y0: y0 - 100, y1: y1 + 100
+            y0: y0 - extra, y1: y1 + extra
         })
         lines.push({    // left line
-            x0: x0 - 1, x1: x0 -1,
-            y0: y0 + 200, y1: y1 + 100
+            x0: x0 - 1, x1: x0 - 1,
+            y0: y0 + paddings.imageH * 0.3, y1: y1 + extra
         })
+
         lines.push({        // title bottom line
-            x0: paddings.about_left * windowWidth - 100,
-            x1: paddings.about_left * windowWidth + about_width + 100,
-            y0: paddings.about_top * windowHeight + windowHeight + 150,
-            y1: paddings.about_top * windowHeight + windowHeight + 150,
+            x0: paddings.about_x * windowWidth - about_width / 2 - extra,
+            x1: paddings.about_x * windowWidth + about_width / 2 + extra,
+            y0: paddings.about_line_y * windowHeight + windowHeight ,
+            y1: paddings.about_line_y * windowHeight + windowHeight,
         })
         return lines
     }
 
     const horizontal_lines = [
-        [0.3, 0.7, 2.2],
-        [0.3, 0.7, 3.2]
+        [0.35, 0.65, 2 + paddings.title_line_y],
+        [0.35, 0.65, 3 + paddings.title_line_y]
     ]
 
     

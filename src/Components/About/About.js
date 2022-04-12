@@ -6,7 +6,7 @@ import Skills from '../Skills/Skills'
 
 
 
-const About = () => {
+const About = ({windowWidth}) => {
     const text = [
         "In my studies and presonal projects I have mostly focused on functional programming and I have experience \
         with machine learning, statistics, algorithmic techniques and optimization. I have also taken slight detour to \
@@ -18,6 +18,7 @@ const About = () => {
       
     ]
 
+
     return (
         <div className='FullPage-Slide'>
            <div className='FullPage-Container'>
@@ -26,7 +27,7 @@ const About = () => {
                       <Description text = {text}/> 
                    </div>
                    
-                   <Skills />
+                   <Skills windowWidth = {windowWidth}/>
              
                </div>
             

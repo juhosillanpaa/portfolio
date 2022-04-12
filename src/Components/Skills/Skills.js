@@ -9,7 +9,7 @@ import ai_icon from './icons/artificial-intelligence-ai.svg'
 import ToolColumn from './ToolColumn'
 import dv_icon from './icons/dashboard-monitoring.svg'
 
-const Skills = (props) => {
+const Skills = ({windowWidth}) => {
 
     let tools = [
         'Python', 'C++', 'Javascript', 'Node.js', 'HTML5', 'CSS', 'React', 'R', 'Matlab', 'SQL', 'NoSQL',
@@ -23,6 +23,7 @@ const Skills = (props) => {
                 <SkillBox
                     title_text={'Web Development'}
                     svg_icon = {se_icon}
+                    windowWidth = {windowWidth}
                 />
                 <SkillBox
                     title_text={'Data Visualization'}

@@ -31,6 +31,10 @@ const Animation = ({
     const [projects, setProjects ] = useState([])
     const [skills, setSkills ] = useState([])
     
+    const L = paddings.factor
+    const M = paddings.factor - 1
+    const S = paddings.factor - 2
+
     useEffect(() => {
         // play correct animation when user scrolls
         playAnimation(scroll.to)
@@ -41,13 +45,15 @@ const Animation = ({
     },[windowHeight, windowWidth])
 
     useEffect(() => {
-        setWelcome(getTextPositions('template', 'Welcome', 30))
-        setIam(getTextPositions('template', "I am", 30))
-        setName(getTextPositions('template', 'Juho Sillanpää', 30))
-        setName(getTextPositions('template', 'Juho Sillanpää', 30))
-        setAbout(getTextPositions('template', 'About me', 30))
-        setSkills(getTextPositions('template', 'My Skills', 30))
-        setProjects(getTextPositions('template', 'Portfolio', 30))
+        let fontSize = 30
+        console.log('fontsize: ', fontSize)
+        setWelcome(getTextPositions('template', 'Welcome', fontSize))
+        setIam(getTextPositions('template', "I am", fontSize))
+        setName(getTextPositions('template', 'Juho Sillanpää', fontSize))
+        setName(getTextPositions('template', 'Juho Sillanpää', fontSize))
+        setAbout(getTextPositions('template', 'About me', fontSize))
+        setSkills(getTextPositions('template', 'My Skills', fontSize))
+        setProjects(getTextPositions('template', 'Portfolio', fontSize))
     },[])
 
     useEffect(() => {
@@ -83,7 +89,7 @@ const Animation = ({
         let points = []
         for (let i = 0; i <name.length; i++){
             let point = new Point(
-                i, 0, 0, 0, [0,0], 3, 'rgba(255,255,255,1)',                  
+                i, 0, 0, 0, [0,0], M, 'rgba(255,255,255,1)',                  
             )
             points.push(point)
         }
@@ -100,11 +106,11 @@ const Animation = ({
     }
 
     const AnimateAbout = () => {
-        let x0 = windowWidth * paddings.about_left
+        let x0 = windowWidth * paddings.about_x
         let i = 0
         let y0 = 1 * windowHeight + windowHeight * paddings.about_top
         pointRef.current.points.forEach(point => {
-            point.setSize(2)
+            point.setSize(S)
             let index = i
             if (i >= about.length - 1){
                 index = i * 2 % about.length
@@ -113,8 +119,8 @@ const Animation = ({
                 point.setNormal()
             }
             let target = about[index]
-            let x = target[0]*3 + x0
-            let y =  target[1]*3 + y0
+            let x = target[0]*M + x0
+            let y =  target[1]*M + y0
             point.updateTarget([x,y])
             point.updateStopFunction(stopFunction_target)
             point.activateTargetGravity()
@@ -125,8 +131,8 @@ const Animation = ({
 
     const animateWelcome = (initializing ) => {
         let y0 = windowHeight * paddings.name_top
-        let x0 = windowWidth /2 - welcome_width / 2
-        let factor = 4
+        let x0 = windowWidth /2 // - welcome_width / 2
+
   
         pointRef.current.points.forEach((point, i) => {
             let index = i
@@ -137,8 +143,8 @@ const Animation = ({
                 point.setNormal()
             }
             let [x,y] = welcome[index]
-            x = x*factor + x0
-            y = y*factor + y0
+            x = x*L + x0
+            y = y*L + y0
             if (initializing){
                 point.setPosition(x,y)
             }else{
@@ -151,7 +157,7 @@ const Animation = ({
     const animateIam = () => {
         let i = 0
         let y0 = windowHeight * paddings.name_top
-        let x0 = (windowWidth / 2) - iam_width / 2
+        let x0 = (windowWidth / 2)
         pointRef.current.points.forEach((point,i) => {
             let index = i
             if (i >= iam.length - 1){
@@ -161,8 +167,8 @@ const Animation = ({
                 point.setNormal()
             }
             let target = iam[index]
-            let x = target[0]*4 + x0
-            let y = target[1]*4 + y0
+            let x = target[0]*L + x0
+            let y = target[1]*L + y0
             point.updateTarget([x,y])
             point.updateStopFunction(stopFunction_target)
             point.activateTargetGravity()
@@ -172,14 +178,14 @@ const Animation = ({
 
 
     const animateSkills = () => {
-        const left_padding = windowWidth / 2 - skills_width/2
+        const left_padding = windowWidth / 2 
         let i = 0
         let y0 = 2*windowHeight + windowHeight * paddings.title_top
         pointRef.current.points.forEach(point => {
             if (point.orbitting){
                 return point
             }
-            point.setSize(2)
+            point.setSize(S)
             let index = i
             if (i >= skills.length - 1){
                 index = i * 2 % skills.length
@@ -188,8 +194,8 @@ const Animation = ({
                 point.setNormal()
             }
             let target = skills[index]
-            let x = target[0]*3 + left_padding
-            let y =  target[1]*3 + y0
+            let x = target[0]*M + left_padding
+            let y =  target[1]*M + y0
             point.updateTarget([x,y])
             point.updateStopFunction(stopFunction_target)
             point.activateTargetGravity()
@@ -198,14 +204,14 @@ const Animation = ({
     }
 
     const animateProjects = () => {
-        const left_padding = (windowWidth / 2) - projects_width/2
+        const left_padding = (windowWidth / 2)
         let i = 0
         let y0 = 3*windowHeight + windowHeight * paddings.title_top
         pointRef.current.points.forEach(point => {
             if (point.orbitting){
                 return point
             }
-            point.setSize(2)
+            point.setSize(S)
             let index = i
             if (i >= projects.length - 1){
                 index = i * 2 % projects.length
@@ -214,8 +220,10 @@ const Animation = ({
                 point.setNormal()
             }
             let target = projects[index]
-            let x = target[0]*3 + left_padding
-            let y =  target[1]*3 + y0
+            let x = target[0]*M + left_padding
+            let y =  target[1]*M + y0
+            //let x = target[0]*2 + left_padding
+            //let y =  target[1]*2 + y0
             point.updateTarget([x,y])
             point.updateStopFunction(stopFunction_target)
             point.activateTargetGravity()
@@ -227,16 +235,15 @@ const Animation = ({
     const animateName = () => {
         let i = 0
         let y0 = windowHeight * paddings.name_top
-        //let x0 = windowWidth * paddings.name_left
-        let x0 = (windowWidth / 2) - name_width / 2
+        let x0 = (windowWidth / 2)
         pointRef.current.points.forEach(point => {
             if (point.orbitting){return point}
-            point.setSize(3)
+            point.setSize(M)
             point.setNormal()
             let index = i % name.length
             let target = name[index]
-            let x = target[0]*4 + x0
-            let y = target[1]*4 + y0
+            let x = target[0]*L + x0
+            let y = target[1]*L + y0
             point.updateTarget([x,y])
             point.updateStopFunction(stopFunction_target)
             point.activateTargetGravity()
