@@ -1,22 +1,22 @@
 export const data = [
     {
         text: 'Portfolio', x: 100, height: 75, pad: 0, dir: 'up',
-        time: '2022 Spring', description: "I made this portfolio to impress you. I have wanted to tinker with pixel animations for a while now\
+        time: '2022 Spring', description: "I made this portfolio to impress you. I have wanted to tinker with pixel animations for a while \
         and this was the perfect opportunity to do so. I also wanted to stand out from the crowd and do something different when it comes to \
-        CV's and boring job applications.\n \
+        CV's and job applications.\n \
         This page is made with React. The pixel animations are done with requestAnimnationFrame and Canvas and the chart above is made with SVG.\
         ",
         github: 'https://github.com/juhosillanpaa/portfolio', github_text: 'Portfolio'
     },{
         text: 'Dungeon game', x: 250, height: 75, pad: 0, time: '2021 Fall', dir: 'up',
-        description: "I quitted my job at Innocode Oy and decided to focus on my studies and figure out what I want to do. \
-        During the fall I still wanted to code something and decided to start tinkering procedural map generation algorithms. \
-        I decided to go with simple dungeon game where the world is procedurally generated as the user roams in it. I also \
-        created some enemies and let the user shoot, which involved figuring out interesting shooter game related mathematics.",
+        description: "I quitted my job at Innocode Oy and decided to focus on my studies and figure out what direction to take in my master's studies. \
+        During the fall I still wanted to code something and decided to start tinkering with procedural map generation algorithms. \
+        I went with simple dungeon game where the world is procedurally generated as the user roams in it. I also \
+        created some enemies and let the user shoot them, which involved figuring out interesting shooter game-related mathematics.",
         github: 'https://github.com/juhosillanpaa/dungeon_game', github_text: 'Dungeon game'
     },{
         text: 'Portfolio', x: 615, height: 75, pad: 0, dir: 'up',
-        time: '2019 Fall', description: "My last portfolio website, that I created after I took some courses about web development. \
+        time: '2019 Fall', description: "My last portfolio website that I created after I took some courses about web development. \
         The page itself is pretty awful, but it did its job helping me secure interviews and a job.",
         github: 'https://github.com/juhosillanpaa/Portfolio-website', github_text: 'Portfolio-website',
         link: 'https://bit.ly/juhosillanpaa_old', link_text: 'My old portfolio'
@@ -42,11 +42,12 @@ export const data = [
         github: 'https://github.com/juhosillanpaa/Tower-Defence-game', github_text: 'Tower-Defence-game'
     },{
         text: 'Innocode Oy', x1: 600, x2: 250, dir:'down', time: '2020 Spring - 2021 Fall', height: 75,
-        description: 'I worked in Innocode Oy for one and half years. I worked mainly with their predictive maintenance system \
-        and was the only Frontend developer in that project. I learned a lot and got a lot of experience especially with data \
-        visualization. The standard data visualization libraries were rarely sufficient so I learned how to make own plots with \
-        tools like Canvas, SVG and WebGL.\nI also learned a lot about designing pages and components as we needed to display a lot \
-        of information in a clear and organized manner.'
+        description: "I worked in Innocode Oy for one and half years. I worked mainly with their predictive maintenance system \
+        and I was the only Frontend developer in that project. It was a great learning experience and shaped my attitude towards programming. \
+        When facing a new problem that I don not know how to solve, I will google it, copypaste someone's shitty solution that does not work in real life, \
+        tinker with it, learn something from it and finally do it better myself. In the project we often needed to plot custom graphs for complex data \
+        and that was how I learned to work with tools like D3.js, canvas, SVG and WebGL. I also got a lot of experience about organizing and structuring information \
+        in an organized manner."
     },{
         text: 'Jysk Oy', x1: 895, x2: 700, dir:'down', time: '2018 Summer - 2019 Fall', height: 75,
         description: 'I worked in Jysk Oy as part time employer along with school.'

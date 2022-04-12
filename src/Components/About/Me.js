@@ -4,6 +4,7 @@ import './Me.css'
 import { Paragraph } from '../Text'
 import hero_image from '../../images/omakuva/yellow_cropped.png'
 import Contact from './Contact'
+import ScrollDownAnimation from '../ScrollDownAnimation/ScrollDownAnimation'
 
 
 const Me = ({config}) => {
@@ -11,8 +12,8 @@ const Me = ({config}) => {
         "I am a developer.",
         "",
         "I am studying in Aalto university in Life Science Technology master's programme. \
-        For me the most important part is being able to solve problems, building new things and being creative, and programming \
-        is just a tool for doing it.",
+        For me, the most important thing is being able to solve problems, building new things and being creative. And who doesn't love \
+        the instant feedback loop of programming.",
         "",
         "I am looking for a new job, where I can challenge myself, meet likeminded people \
         and learn new skills. Feel free to contact me via email, LinkedIn, WhatsApp or by calling, if you want to \
@@ -45,7 +46,7 @@ const Me = ({config}) => {
                </div>
             
            </div>
-                
+           <ScrollDownAnimation />
         </div>
     )
 }
