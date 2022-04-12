@@ -3,3 +3,17 @@
     top: 0px;
     z-index: 1;
 }
+
+
+.Hero-animation{
+    position:absolute;
+    bottom: 0px;
+    right: 0px;
+    z-index: 2;
+    border:1px solid white;
+    background-color: black;
+}
+
+.hero-pre-canvas{
+    display:none;
+}

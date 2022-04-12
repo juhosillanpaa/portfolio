@@ -1,7 +1,64 @@
 .Work-cardContainer{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: center; 
+}
 
-    
+.Work{
+    height: 100%;
+}
+.Work-text-container{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.Work .Description{
+    height:100px;
+}
+
+.Work-github{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 0em; 
+}
+
+.Work-github_box{
+    margin: 2em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.Work-icon{
+    height: 40px;
+    width: 40px;
+    padding-right:10px;
+}
+
+/* Add nice hover effect that matches the yellow style */
+.Work-github_box:hover p{
+    color: rgba(255, 166, 0, 1) !important;
+}
+.Work-github_box:hover path{
+    fill: rgba(255, 166, 0, 1);
+}
+
+/* Add nice onpress effect */
+.Work-github_box:active p{
+    color: rgba(255, 166, 0, 0.5) !important;
+}
+.Work-github_box:active path{
+    fill: rgba(255, 166, 0, 0.5);
+}
+.Work-github_box:active{
+    transform: translateY(2px);
+}
+
+
+@media only screen and (min-width:1600px){
+
 }

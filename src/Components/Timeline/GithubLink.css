@@ -1,0 +1,27 @@
+.GithubLink{
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.GithubLink-icon{
+    height: 40px;
+    width: 40px;
+    padding-right:10px;
+    fill: white;
+}
+
+.GithubLink:hover p, .GithubLink:hover .GithubLink-icon{
+    fill: rgba(255, 166, 0, 1);
+    color: rgba(255, 166, 0, 1);
+}
+.GithubLink:active{
+    transform: translateY(2px);
+}
+
+.GithubLink:active p, .GithubLink:active .GithubLink-icon{
+    fill: rgba(255, 166, 0, 0.7);
+    color: rgba(255, 166, 0, 0.7);
+}

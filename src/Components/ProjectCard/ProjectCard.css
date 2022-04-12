@@ -1,6 +1,6 @@
 .ProjectCard{
-    width:500px;
-    height: 600px;
+    width:450px;
+    height: 450px;
     background-repeat: no-repeat;
     background-size: cover;
     color:white;
@@ -11,20 +11,26 @@
     z-index: 1;
     margin: 1.5em;
     overflow: hidden;
+    box-sizing: border-box;
 }
 .ProjectCard-overlay{
     display:block;
-    width:500px;
+    width:450px;
     height:0px;
     position:absolute;
     top:0px;
     left:0px;
-    background-color: rgba(0,0,0,0.8);
+    background-color: rgba(0,0,0,1);
     z-index:-1;
 }
-.ProjectCard-description{
-    display:none;
+.ProjectCard-description p{
+    color: rgba(255,255,255,0.8);
 }
+.ProjectCard-content{
+    display:none;
+    
+}
+
 
 .ProjectCard-btn{
     position: absolute;
@@ -37,7 +43,7 @@
     cursor: pointer;
 }
 
-.ProjectCard:hover .ProjectCard-description{
+.ProjectCard:hover .ProjectCard-content{
     display:block;  
 }
 
@@ -46,17 +52,17 @@
         height:0px;
     }
     to {
-        height:600px;
+        height:450px;
     }
 }
 @keyframes contract {   /*remove the overlay by sliding it to bottom */
     from {
         top:0px;
-        height: 600px;
+        height: 450px;
     }
     to {
-        top: 600px;
-        height:600px;
+        top: 450px;
+        height:450px;
     }
 }
 
@@ -98,4 +104,15 @@
 }
 .ProjectCard-btn.out{
     animation: slideOut 0.3s;
+}
+
+
+@media only screen and (min-width:1600px){
+    .ProjectCard{
+        height: 450px;
+        width: 450px;
+    }
+    .ProjectCard-overlay{
+        
+    }
 }

@@ -1,9 +1,23 @@
 .Title-text{
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 600;
+    line-height: 1.25em;
+    font-size: 1.375em;
     color: white;
 }
 
 .SubTitle-text{
+    font-family: Arial, Helvetica, sans-serif;
     color: white;
+    font-weight: 400;
+    font-size: 1.125em;
+    line-height: 1.22222222em;
+    padding: 5px;
+}
+
+@media only screen and (min-width: 1600px){
+    .SubTitle-text{
+        font-size: 1.5em;
+        line-height: 1.25em;
+    }
 }

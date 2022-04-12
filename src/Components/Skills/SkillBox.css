@@ -1,0 +1,28 @@
+.SkillBox{
+    height: 200px;
+    width: 250px;
+    
+    /*border: 1px solid white;*/
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.svg_icon{
+    height:50px;
+    width:50px;
+}
+
+
+@media only screen and (min-width: 1600px){
+    .svg_icon{
+        height:70px;
+        width:70px;
+    }
+    .SkillBox{
+        height: 250px;
+        width: 300px;
+    }
+    
+}

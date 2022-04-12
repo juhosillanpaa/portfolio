@@ -1,29 +1,46 @@
 import React from 'react'
 import { Title } from '../Text'
 import SkillColumn from '../SkillColumn/SkillColumn'
+import SkillBox from './SkillBox'
 import './Skills.css'
+import se_icon from './icons/software-engineering.svg'
+import cs_icon from './icons/computer-engineering.svg'
+import ai_icon from './icons/artificial-intelligence-ai.svg'
+import ToolColumn from './ToolColumn'
+import dv_icon from './icons/dashboard-monitoring.svg'
 
 const Skills = (props) => {
+
+    let tools = [
+        'Python', 'C++', 'Javascript', 'Node.js', 'HTML5', 'CSS', 'React', 'R', 'Matlab', 'SQL', 'NoSQL',
+        'API','Canvas', 'WebQL', 'D3.js', 'Redux', 'GraphQl', 'TensorFlow', 'PyTorch',
+        'Git'
+    ]
+
     return (
         <div className = 'Skills'>
-            <Title text = {'Skills'} />
             <div className='Skills-box'>
-                <SkillColumn
+                <SkillBox
                     title_text={'Web Development'}
-                    description_text={'I enjoy designing and developing websites.'}
-                    list_items={['React', 'HTML', 'JS', 'CSS']}
+                    svg_icon = {se_icon}
                 />
-                <SkillColumn
+                <SkillBox
+                    title_text={'Data Visualization'}
+                    svg_icon = {dv_icon}
+                />
+                <SkillBox
                     title_text={'General Programming'}
-                    description_text={'Solving problems by coding is my passion!'}
-                    list_items={['Python','C++','R','SQL']}
+                    svg_icon = {cs_icon}
                 />
-                <SkillColumn
+                <SkillBox
                     title_text={'Machine Learning'}
-                    description_text = {'something super duper smart about machine learning!'}
-                    list_items={['Tensorflow', 'PyTorch']}
+                    svg_icon = {ai_icon}
                 />
+
+
             </div>
+            <ToolColumn tools= {tools} />
+
         </div>
 
     )

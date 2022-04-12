@@ -1,16 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './Landing.css'
+import hero_image from '../../images/omakuva/yellow_cropped.png'
+import forest_image from '../../images/forest7.jpg'
+import ScrollDownAnimation from '../ScrollDownAnimation/ScrollDownAnimation'
 
-import cropped from '../../images/omakuva/blue_v3.png'
-import yellow from '../../images/omakuva/yellow.png'
-import yellow_s from '../../images/omakuva/yellow_shaded.png'
 
-
-const Landing = () => {
+const Landing = ({version}) => {
 
     return(
         <div className=' FullPage-Slide Landing'id = 'Landing-div'>
-            <img src = {yellow} className = 'Landing-image' />   
+            <div className='box'></div>
+            { version == 2 ? 
+                <img src = {forest_image} className = 'Landing-background-image'/>
+                :
+                <img src = {hero_image} className = 'Landing-image' />
+            }
+            <ScrollDownAnimation />
         </div>
     )
 }

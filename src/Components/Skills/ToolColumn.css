@@ -1,0 +1,16 @@
+.ToolColumn{
+    margin-top: 60px;
+    display:flex;
+    flex-direction: row;
+    padding: 0px;
+    justify-content: center;
+}
+.Tool{
+    text-align: start;
+    transform: rotate(30deg);
+    width: 50px;
+    overflow: visible;
+    /*opacity: 0.65;*/
+    padding: 0px;
+    font-size: 0.9rem;
+}

@@ -2,73 +2,90 @@ import React, { useState, useEffect, useRef } from 'react'
 import './SVGBackground.css'
 
 
-const SVGBackground = () => {
-    const [ height, setHeight ] = useState(0)
-    const [ width, setWidth ] = useState(0)
-    const [windowHeight, setWindowHeight] = useState(0)
-    const lineRef = useRef({ lines: [] })
+const about_width = 450
 
-    const x0_list = [100, 200, 380, 690, 1200, 1260, 1600, 2000, 2500, 2600, 3000, 3500, 3720  ]
-
-    useEffect(() => {
-        let element = document.getElementById('baseDIV')
-        let w= element.clientWidth
-        let h = element.offsetHeight
-        setWindowHeight(window.innerHeight)
-        setHeight(h)
-        setWidth(w)
-        lineRef.current.lines = createLines()
-    },[])
-    let color = 'rgb(50,50,50)'
-
-    useEffect(() => {
-        let animationFrameId
-        const render = () => {
-            updateLines()
-            animationFrameId = window.requestAnimationFrame(render)
-        }
-        //render()
-        return () => {
-            window.cancelAnimationFrame(animationFrameId)
-        }
-    },[])
-
-
-    const createLines = () => {
-        let angle = 75
-        let rad = angle / 180 * Math.PI
-        let lines = []
-        for (let i = 0; i < x0_list.length; i++){
-            let x1 = x0_list[i]
-            let y2 = Math.tan(rad) * x1
-            lines.push({
-                x1: x1, y1: 0, x2: 0, y2: y2
-            })
-        }
-        return lines   
-    }
-
-    const updateLines = () => {
-        return
-        let newLines = lineRef.current.lines.map(line => {
-            line.x1 = line.x1 + 1
-            return line
-        })
-        lineRef.current.lines = newLines
-    }
-    return (
-        <div>
-            
-        </div>
-    )
+const SVGBackground = ({ fullHeight, windowWidth, windowHeight, paddings }) => {
+    const [lines, setLines ]= useState([])
  
+    useEffect(() => {
+        setLines(createLines(windowHeight, windowWidth))
+    },[windowWidth, windowHeight])
+
+    let color = 'rgba(255,255,255,0.6)'
+
+    const createSkillsLines = (wh, ww) => {
+        let p = 20
+        let y0 = 2 * wh + wh * paddings.description_top + paddings.descH - p
+        let y1 = y0 + 2*p + paddings.skillBoxH            
+        let box_w = 4 * paddings.skillBoxW     
+        let x0 = (ww - box_w) / 2 - p
+        let x1 = ww - x0 + p
+        let d = 100
+        let lines = [
+            {x0: x0 - d, x1: x1 + d, y0: y0, y1:y0 },
+            {x0: x0 - d, x1: x1 + d, y0: y1, y1: y1 },
+            {x0: x0, x1: x0, y0: y0 - d, y1: y1 + d },
+            {x0: x1, x1: x1, y0: y0 - d, y1: y1 + d },
+        ]
+        return lines
+    }
+
+    const createHeroFrame = (wh, ww) => {
+        let x0 = ww * ( 1 - paddings.image_right) - paddings.imageW
+        let x1 = ww * ( 1 - paddings.image_right)
+        let y0 = wh + wh / 2 - paddings.imageH / 2
+        let y1 = wh + wh / 2 + paddings.imageH / 2
+
+        let lines = []
+        lines.push({    //bottom line
+            x0: x0 - 300, x1: x1 + 100,
+            y0: y1+1 , y1: y1+1 
+        })
+        lines.push({    // right line ( taller )
+            x0: x1, x1: x1 ,
+            y0: y0 - 100, y1: y1 + 100
+        })
+        lines.push({    // left line
+            x0: x0 - 1, x1: x0 -1,
+            y0: y0 + 200, y1: y1 + 100
+        })
+        lines.push({        // title bottom line
+            x0: paddings.about_left * windowWidth - 100,
+            x1: paddings.about_left * windowWidth + about_width + 100,
+            y0: paddings.about_top * windowHeight + windowHeight + 150,
+            y1: paddings.about_top * windowHeight + windowHeight + 150,
+        })
+        return lines
+    }
+
+    const horizontal_lines = [
+        [0.3, 0.7, 2.2],
+        [0.3, 0.7, 3.2]
+    ]
+
+    
+
+    const createLines = (wh, ww) => {
+        let lines = []
+        horizontal_lines.forEach(line => {
+            const x0 = line[0] * ww
+            const x1 = line[1] * ww
+            const y = line[2] * wh
+            lines.push({ x0: x0, y0: y, x1: x1, y1: y })
+
+        })
+        let framelines = createHeroFrame(wh, ww)
+        const skills_grid_lines = createSkillsLines(wh, ww)
+        let temp = lines.concat(skills_grid_lines).concat(framelines)
+        return temp
+    }
+
     return(
         <div className='SVGBackground'>
-            <svg height = {height} width = {width} >
-
+            <svg height = {fullHeight} width = {windowWidth} >
                 {
-                    lineRef.current.lines.map((item, index) => (
-                        <line {...item} key = {index} stroke = {color}/>
+                    lines.map((item, index) => (
+                        <line x1 = {item.x0} x2 = {item.x1} y1 = {item.y0} y2 = {item.y1} key = {index} stroke = {color}/>
                     ))
                 }
             </svg>

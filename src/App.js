@@ -11,73 +11,110 @@ import {FullPage, Slide}  from 'react-full-page'
 import About from './Components/About/About'
 import Animation from './Components/Animation/Animation'
 import SVGBackground from './Components/SVG/SVGBackground'
+import Me from './Components/About/Me'
+import Timeline from './Components/Timeline/Timeline'
+
+const VERSION = 2
+
+const largeScreenW = 1600
+const mediumScreenW = 1000
 
 
 const App = (props) => {
 	const [currentPage, setCurrentPage ] = useState(0)
-	const [playDropAnimation, setPlayDropAnimation ] = useState(false)		
-	const [replayNameAnimation, setReplayNameAnimation ] = useState(false)		
-	const [playAboutAnimation, setPlayAboutAnimation ] = useState(false)	
+	const [scrollProp, setScrollProp] = useState({from: 0, to: 0})
+	const [resize, setResize] = useState(0)
+	const [ height, setHeight ] = useState(0)
+    const [ width, setWidth ] = useState(0)
+    const [windowHeight, setWindowHeight] = useState(0)
 
-	const handlePageChange = (n) => setCurrentPage(n)
-	const handleBeforePageChange = (n) => {
-		return
-		console.log('scrolling: ', n)
-		if (currentPage === 0 && n === 1){		//transition from 0 to 1
-			
-			setReplayNameAnimation(false)
-		}
-		if (currentPage === 1 && n === 0){		// transition from 1 to 0
-			setReplayNameAnimation(true)
-			setPlayDropAnimation(false)
-		}
-	}
+	useEffect(() => {
+        let element = document.getElementById('baseDIV')
+        let wh = window.innerHeight
+        let h = element.clientHeight
+        let w = element.clientWidth
+        setWindowHeight(wh)
+        setHeight(h)
+        setWidth(w)
+    },[resize])
+
 	const beforeChange = (prop) => {
-		let {from, to} = prop
-		if (from === 0 && to === 1){
-			setPlayDropAnimation(true)
-			setReplayNameAnimation(false)
-		}
-		if (from === 1 && to === 0){
-			setPlayDropAnimation(false)
-			setReplayNameAnimation(true)
-		}
-	}
-	const afterChange = (prop) => {
-		let {from, to} = prop
-		if (from === 0 && to === 1){
-			setPlayAboutAnimation(true)
-			
-		} 
+		setScrollProp(prop)
+		setCurrentPage(prop.to)
 	}
 
-	const handleScrollUnavailable = (e) => {
-		console.log('unavailable: ', e)
+	const windowResize = () => {
+		setResize(i => i + 1)
 	}
+	window.onresize = windowResize
+
+	const getPaddings = () => {
+
+		if (width > largeScreenW){
+			return {
+				name_top: 0.5, name_left: 0.05, title_top: 0.075, imageH: 800, imageW: 600, image_right: 0.1,
+				descH: 175, skillBoxW: 300, skillBoxH: 250, description_top: 0.35, about_left: 0.2, about_top: 0.25
+			}
+		} else if (width > 1000) return {
+			name_top: 0.5, name_left: 0.05, title_top: 0.025, imageH: 600, imageW: 450, image_right: 0.02,
+			descH: 150, skillBoxW: 250, skillBoxH: 200, description_top: 0.35, about_left: 0.2, about_top: 0.25
+		}
+		else return {
+			name_top: 0.5, name_left: 0.05, title_top: 0.075, imageH: 600, imageW: 450, image_right: 0.05,
+			descH: 150, skillBoxW: 250, skillBoxH: 200,  description_top: 0.35, about_left: 0.4, about_top: 0.25
+		}
+	
+	}
+
 
 	return (
 		<div className = 'Base' id = 'baseDIV'>
-			<SVGBackground />
-			<Animation playDropAnimation = {playDropAnimation}
-				replayNameAnimation = {replayNameAnimation}
-				page = {currentPage}
+			<SVGBackground
+				resize = {resize}
+				windowHeight = {windowHeight}
+				fullHeight = {height}
+				windowWidth = {width}
+				paddings = {getPaddings()}
+				version = {VERSION}
 			/>
+			<Animation
+				page = {currentPage}
+				scroll = {scrollProp}
+				resize = {resize}
+				windowWidth = {width}
+				windowHeight = {windowHeight}
+				fullHeight = {height}
+				paddings = {getPaddings()}
+				VERSION = {VERSION}
+			/>
+			
 
-			<FullPage beforeChange = {beforeChange} afterChange={afterChange} duration = {1000}>
+			<FullPage beforeChange = {beforeChange} duration = {1000}>
 				<Slide>
-					<Landing />
+					<Landing version = {VERSION}/>
 				</Slide>
+				{VERSION == 2 ?
+					<Slide>
+						<Me />
+					</Slide>
+					:<></>
+				}
 
 				<Slide>
 					<About />
 				</Slide>
 
 				<Slide>
-					<Work />
+					{true ? 
+						<Timeline windowWidth = {width} />
+						:
+						<Work windowWidth = {width} />
+					}
 				</Slide>
 
 			</FullPage>
 
+			
 		
 			
 		</div>

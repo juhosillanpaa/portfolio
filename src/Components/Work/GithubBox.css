@@ -1,0 +1,16 @@
+.GithubBox{
+    margin: 2em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1;
+}
+
+
+
+.GithubBox-icon{
+    height: 40px;
+    width: 40px;
+    padding-right:10px;
+}

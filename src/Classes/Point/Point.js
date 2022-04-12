@@ -65,7 +65,20 @@ class Point {
         this.orbitAngle = 0
         this.orbitR = 0
         this.connected = []
-    }   
+        this.maxY = 0
+        this.pixelTrail = []
+        this.trailLength = 3
+        this.extra = false
+    }
+    setDirection(dir){
+        this.direction = dir
+    }
+    setExtra(){
+        this.extra = true
+    }
+    setNormal(){
+        this.extra = false
+    }
     activate(){
         this.active = true
         this.stop = false
@@ -79,6 +92,9 @@ class Point {
     slowVelocity(){
         this.velocity = this.velocity * 0.95
     }
+    setTrailLength(length){
+        this.trailLength = length
+    }
     startOrbitting(point, angle, radius){
         this.orbitting = true
         this.orbitPoint = point
@@ -91,25 +107,36 @@ class Point {
     setVelocity(velocity){
         this.velocity = velocity
     }
+    setPosition(x,y){
+        this.x = x
+        this.y = y
+    }
+    setYMax(yMax){
+        this.yMax = yMax
+    }
+    setColor(color){
+        this.color = color
+    }
+    setSize(size){
+        this.size = size
+    }
     connectTo(connected){
         this.connected = connected
+    
     }
 
+
     draw(ctx) {
-   
-        let color = this.stop ? WHITE : this.color
+        if (this.extra && this.stop){ 
+            return
+        }
+        let color = this.color
         ctx.fillStyle = color
         ctx.strokeStyle= color
         ctx.fillRect(this.x, this.y, this.size, this.size)
-        ctx.beginPath()
-        ctx.moveTo(this.x, this.y)
-        this.trail.forEach(pos => {
-            ctx.lineTo(pos[0], pos[1])
-        })
-        ctx.stroke()
     }
+
     drawConnection(ctx, point){
-        
         ctx.strokeStyle = W_STROKE
         ctx.beginPath()
         ctx.moveTo(this.x, this.y)
@@ -136,19 +163,27 @@ class Point {
         this.activate()
         this.target = new_target
     }
-
+    /*
     fadeTrail(){
         if (this.trail.length > 0){
             this.trail.pop()
         }
     }
-    updateTrail(){
-        this.trail.unshift([this.x, this.y])
-        if (this.trail.length > 3){
-            this.trail.pop()
+    addToTrail(point){
+        this.pixelTrail.unshift(point)
+        if (this.pixelTrail.length > this.trailLength){
+            this.pixelTrail.pop()
         }
 
     }
+    updateTrail(){
+        this.trail.unshift([this.x, this.y])
+        if (this.trail.length > this.trailLength){
+            this.trail.pop()
+        }
+
+    }*/
+
     updateOrbitPosition(){
         //return
         let d_angle = this.velocity / this.orbitR
@@ -157,12 +192,16 @@ class Point {
         this.y = this.orbitPoint[1] + this.orbitR * Math.sin(rad)
         this.orbitAngle = rad
     }
+    get_free_direction_vector(){
+        let d_vec = get_free_direction_vector(this)
+        return d_vec
+    }
 
 
     updatePosition(width, height){
         //Calculate the new direction vector for the point
         if (this.stop){
-            this.fadeTrail()
+            //this.fadeTrail()
             return
         }
         if (this.orbitting){
@@ -180,7 +219,7 @@ class Point {
         let y = this.y + vec[1]
 
         //update trail
-        this.updateTrail()
+        //this.updateTrail()
 
         //Assign new values
         this.x = x
@@ -192,6 +231,10 @@ class Point {
     testStopFunction(){
         if (this.stopFunction(this)){
             this.stop = true
+            if (this.useTargetGravity){
+                this.x = this.target[0]
+                this.y = this.target[1]
+            }
         }
     } 
     

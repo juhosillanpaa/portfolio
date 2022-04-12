@@ -1,16 +1,8 @@
 import React from 'react'
 import './Description.css'
-import {Title, Paragraph} from '../Text'
+import {Paragraph} from '../Text'
 
-const Description = (props) => {
-    const text = [
-        'asasdasda',
-        'asdasdasd'
-    ]
-
-
-
-
+const Description = ({text}) => {
     return (
         <div className = 'Description'>
             {

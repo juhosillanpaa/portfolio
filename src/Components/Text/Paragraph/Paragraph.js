@@ -2,10 +2,16 @@ import React from 'react'
 import './Paragraph.css'
 
 const Paragraph = ({text}) => {
+    const splitted = text != undefined ? text.split('\n') : [text]
+
     return (
-        <p className='Paragraph-text'>
-            {text}
-        </p>
+        <div>
+        {splitted.map((str, index) => 
+            <p className='Paragraph-text' key = {index}>
+            {str}
+            </p>
+        )}
+        </div>
     )
 }
 

@@ -5,7 +5,7 @@ export const getTextPositions = (elementID, text, fontsize) => {
     const H = 50
     let canvas = document.getElementById(elementID)
     const ctx = canvas.getContext('2d')
-    ctx.fillstyle = 'white'
+    ctx.fillstyle = 'black'
     ctx.font = `${fontsize}px Verdana`
     ctx.clearRect(0,0,W,H)
     ctx.fillText(text, 5, 40)
@@ -17,7 +17,7 @@ export const getTextPositions = (elementID, text, fontsize) => {
         for (let x = 0; x < xn; x++){
             let i = (y*xn + x) * 4
             let a = imageData.data[i + 3]
-            if (a > 128 ){  
+            if (a > 90 ){  
                 positions.push([x,y])     
             }
             if (TEST && (y == 0 || y == yn-1 || x == 0 || x == xn-1) ){
@@ -28,3 +28,4 @@ export const getTextPositions = (elementID, text, fontsize) => {
     }
     return positions
 }
+

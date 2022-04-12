@@ -11,7 +11,7 @@ const ProjectCard = ({timerange, title, description, image}) => {
     const style = {
         backgroundImage: `url(${image})`
     }
-   
+    const showbtn = false
 
     return(
         <div className='ProjectCard' style={style}
@@ -32,9 +32,12 @@ const ProjectCard = ({timerange, title, description, image}) => {
                     <Paragraph text={description}/>
                 </div>
 
-                <div className={`ProjectCard-btn ${out ? 'out':''}`}>
+                {   showbtn ?
+                    <div className={`ProjectCard-btn ${out ? 'out':''}`}>
                     see more
-                </div>
+                    </div>
+                    : <></>
+                }
             </div>
             
         </div>

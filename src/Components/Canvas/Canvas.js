@@ -17,11 +17,14 @@ const Canvas = ({
         const canvas = canvaRef.current
         const context = canvas.getContext('2d')
         let animationFrameId
-        let sceneUpdated
+        let sceneUpdated, start
 
-        const render = () => {
-            //console.log('rendering')
-            sceneUpdated = update()
+        const render = (timestamp) => {
+            if (start === undefined){
+                start = timestamp
+            }
+            const elapsed = timestamp - start
+            sceneUpdated = update(elapsed)
             //console.log('sceneupdated; ', sceneUpdated)
             if (sceneUpdated){
                 draw(context)
