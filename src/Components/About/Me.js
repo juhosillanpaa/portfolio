@@ -18,8 +18,7 @@ const Me = ({config}) => {
         "I am looking for a new job, where I can challenge myself, meet likeminded people \
         and learn new skills. Feel free to contact me via email, LinkedIn, WhatsApp or by calling, if you want to \
         ask additional information or schedule meeting.",
-        "",
-        "Thank you for your interest!"
+        ""
     ]
     
 

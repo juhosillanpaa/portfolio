@@ -4,7 +4,7 @@ export const data = [
         time: '2022 Spring', description: "I made this portfolio to impress you. I have wanted to tinker with pixel animations for a while \
         and this was the perfect opportunity to do so. I also wanted to stand out from the crowd and do something different when it comes to \
         CV's and job applications.\n \
-        This page is made with React. The pixel animations are done with requestAnimnationFrame and Canvas and the chart above is made with SVG.\
+        This page is made with React. The pixel animations are done with requestAnimationFrame and Canvas and the chart above is made with SVG.\
         ",
         github: 'https://github.com/juhosillanpaa/portfolio', github_text: 'Portfolio'
     },{
