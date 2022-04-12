@@ -3,50 +3,36 @@
     /*border:1px solid white;*/
 }
 
-.SVG-ProjectGroup, .SVG-WorkGroup{
-    cursor: pointer;
-}
-
-.SVG-ProjectGroup text, .SVG-WorkGroup text{
+.Chart-container text{
+    font-size: 0.8em;
     fill: white;
     font-weight: 300;
     line-height: 1.25;
     font-family:Arial, Helvetica, sans-serif;
-    font-size: 1em;
     letter-spacing: 0.05rem;
 }
-
 
 .SVG-ProjectLine, .SVG-WorkLine{
     stroke: white;
     stroke-width: 0.5;
-
-}
-
-.SVG-ProjectGroup:hover .SVG-ProjectLine, .SVG-WorkGroup:hover .SVG-WorkLine{
-    stroke-width: 2;
-}
-
-.SVG-ProjectGroup-active .SVG-ProjectLine, .SVG-WorkGroup.active .SVG-WorkLine{
-    stroke: rgba(255, 166, 0, 1);
 }
 
 
 .SVG-itemgroup{
     cursor: pointer;
 }
-.SVG-itemgroup text{
-    fill: white;
-    font-weight: 300;
-    line-height: 1.25;
-    font-family:Arial, Helvetica, sans-serif;
-    font-size: 1em;
-    letter-spacing: 0.05rem;
-}
+
 .SVG-itemgroup:hover .SVG-ProjectLine, .SVG-itemgroup:hover .SVG-WorkLine{
     stroke-width: 2;
 }
 .SVG-itemgroup.active .SVG-ProjectLine, .SVG-itemgroup.active .SVG-WorkLine{
     stroke: rgba(255, 166, 0, 1) !important;
     stroke-width: 2;
+}
+
+@media only screen and (min-width: 1600px){
+    .Chart-container text {
+        font-size: 1em;
+    }
+    
 }
