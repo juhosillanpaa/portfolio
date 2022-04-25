@@ -1,0 +1,36 @@
+.Timeline{
+    display:grid;
+    grid-template-areas:
+    'header'
+    'chart'
+    'info';
+    row-gap: 1.5em;
+    padding-top: 6em;
+    height: 100vh;
+}
+
+
+.Timeline-chart-container{
+    grid-area: chart;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.Timeline-info-container{
+    grid-area: info;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    position:relative;
+    height: 360px;  /* Currently largest container has height of 360 px*/
+}
+
+@media only screen and (min-height: 900px){
+    .Timeline{
+        row-gap: 3em;  
+    }
+
+}

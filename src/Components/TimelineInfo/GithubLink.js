@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './GithubLink.css'
-import { Paragraph } from '../Text'
+import { Paragraph } from '../../Components/Text'
 import { ReactComponent as Icon } from '../../images/github.svg'
 
 
