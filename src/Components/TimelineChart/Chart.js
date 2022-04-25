@@ -12,22 +12,21 @@ const Chart = ({width, height, items, timeline, handleClick, active }) => {
     const hoverR = 35
     const linePad = 10
     const projectTextPad = 30
-
-    
     const workTextPad = 40
 
-    const endCircleR = 15
+    const endCircleR = 12
     const endCirclePad = 10
+    let spacing = endCirclePad + endCircleR 
 
-    let finalX = timeline[timeline.length - 1].x
-    let startX = timeline[0].x
-    
-    const mainLine = {x1: startX, x2: finalX}
-    //const mainLine = {x1: 100, x2: width }
-    const startCircleX = mainLine.x1 - endCircleR - endCirclePad
-    const endCircleX = mainLine.x2 + endCircleR + endCirclePad
+    let finalX = timeline[timeline.length - 1].x 
+    let startX = timeline[0].x + spacing
+    let mainLine = {x1: startX, x2: finalX - endCirclePad - 2* endCircleR}
 
-   const rotate = height > 350 ? true : false
+    const endCircleX = mainLine.x2 + spacing  - 1
+
+   const rotate = false //height > 350 ? true : false
+
+   
 
 
 
@@ -35,10 +34,8 @@ const Chart = ({width, height, items, timeline, handleClick, active }) => {
         <div className='Chart-container'>
             <svg width = {width} height = {height}>
                 <g>
-                    <circle cx = {startCircleX} cy = {y} r = {endCircleR} stroke = 'white' fill = 'transparent' strokeWidth={0.5}/>
+                    <circle cx = {endCircleX} cy = {y} r = {endCircleR} stroke = 'white' fill = 'transparent' strokeWidth={0.5}/>
                     <line x1 = {mainLine.x1} x2 = {mainLine.x2} y1 = {y} y2 = {y} stroke= 'white' strokeWidth={2}/>
-                    {/*<circle cx = {endCircleX} cy = {y} r = {endCircleR} stroke = 'white' fill = 'transparent' strokeWidth={0.5}/>
-                        */}
                 </g>
                
                 {timeline.map((item,index) =>
@@ -50,7 +47,7 @@ const Chart = ({width, height, items, timeline, handleClick, active }) => {
                     </g>
                 )}
                 <mask id = 'mymask'>
-                    <rect x = {0} width = {mainLine.x2} y = {0} height = {height} fill = {'white'} />
+                    <rect x = {spacing} width = {width} y = {0} height = {height} fill = {'white'} />
                 </mask>
 
                 {items.map((item, index) => 
@@ -82,7 +79,7 @@ const Chart = ({width, height, items, timeline, handleClick, active }) => {
                                 <line x1 = {item.x2} x2 = {item.x2} y1 = {y + linePad} y2 = {y + item.height}
                                     className = 'SVG-WorkLine'
                                 />
-                                <line x1 = {item.x1-1} x2 = {item.x2 + 1}
+                                <line x1 = {item.x1+1} x2 = {item.x2 - 1}
                                     y1 = {y + item.height -1} y2 = {y + item.height -1}
                                     className = 'SVG-WorkLine'
                                 />

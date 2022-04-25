@@ -6,16 +6,18 @@ import './ToolColumn.css'
 const ToolColumn = ({tools}) => {
 
     return (
-        <div className='ToolColumn'>
-              {
-                tools.map((item, index) => {
-                    return(
-                        <div className='Tool' key = {index}> 
-                            <Paragraph text = {item} />
-                        </div>
-                    ) 
-                })
-            }
+        <div className='ToolColumn-container'>
+            <div className='ToolColumn'>
+                {
+                    tools.map((item, index) => {
+                        return(
+                            <div className='Tool' key = {index}> 
+                                <Paragraph text = {item} />
+                            </div>
+                        ) 
+                    })
+                }
+            </div>
         </div>
     )
 

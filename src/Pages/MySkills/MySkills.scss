@@ -1,0 +1,49 @@
+.MySkills{
+    display:grid;
+    grid-template-areas:
+    'header'
+    'text'
+    'skills';
+    padding-top: 4em;
+    min-height: 70vh;
+    row-gap: 2em;
+    align-content: start;
+}
+
+
+.MySkills-text-container{
+    grid-area: text;
+    display:grid;
+    justify-content: center;
+    align-content: center;
+}
+
+.MySkills-text{
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: start;
+    word-break:normal; 
+    width: 1000px;
+}
+
+
+.MySkills-skills-container{
+    grid-area: skills;
+    height: 220px;
+
+}
+@media only screen and (min-width: 1300px){
+    .MySkills{
+        row-gap: 3em;
+    }
+    .MySkills-skills-container{
+        height: 320px;
+    }
+}
+
+@media only screen and (min-width: 1600px){
+    .MySkills{
+        row-gap: 5em;
+    }
+}

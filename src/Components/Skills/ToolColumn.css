@@ -1,24 +1,37 @@
+.ToolColumn-container{
+    display:grid;
+    width:100%;
+    justify-content: center;
+}
+
 .ToolColumn{
-    margin-top: 30px;
+    margin-top: -20px;
     display:flex;
     flex-direction: row;
-    padding: 0px;
     justify-content: center;
+    width: 700px;
 }
 .Tool{
     text-align: start;
     transform: rotate(30deg);
-    width: 50px;
+    width: 40px;
     overflow: visible;
-    /*opacity: 0.65;*/
     padding: 0px;
-    font-size: 0.9rem;
+}
+.Tool p{
+    font-size: 0.8rem !important;
 }
 
 
-@media only screen and (min-width: 1600px){
+@media only screen and (min-width: 1300px){
     .ToolColumn{
-        margin-top: 60px;
+        width: 800px;
+    }
+    .Tool{
+        width: 50px;
+    }
+    .Tool p{
+        font-size: 0.9rem !important;
     }
     
 }

@@ -16,6 +16,7 @@ export const vector_add = (a,b) => {
     return c
 }
 
+
 export const addNoise = (val, count = 0) => {
     if (count > 0){
         console.log('count: ', count)
@@ -30,20 +31,41 @@ export const addNoise = (val, count = 0) => {
     return num
 }
 
+
+export const multiply = (a, b) => {
+    //multiply vector a with scalar b
+    return a.map(item => (item * b))
+}
+export const vector_multiply = (a, b) => {
+    //multiply vector a with scalar b
+    let i = ( a[0] * b[0] )
+    let j = ( a[1] * b[1] )
+    return [ i, j ]
+}
+
 export const distance = (a,b) => {
+    // calculate distance between points a and b
+    // If only 1 argument is given, calculates the distance of that vector
     let vec = [b[0] - a[0], b[1] - a[1]]
     return Math.sqrt(vec[0]**2 + vec[1]**2)
 }
+export const length = (a) => {
+    //calculates the length of given vec
+    return Math.sqrt(a[0]**2 + a[1]**2)
+}
+
 
 export const get_unit_vector = (vec) => {
     let l = Math.sqrt(vec[0]**2 + vec[1]**2)             //length of vec
     if (l < 0.001){
-        //if direction vector is 0 => we end up with NaN-values
+        //if length is close to zero, this can lead to NaN
         return [0,0]
     }
     let u_vec = [ vec[0]/l, vec[1]/l]              //unit vector
     return u_vec
 }
+
+
 
 export const get_noised_unit_direction_vector = (p) => {
     let noised_d_vec = [addNoise(p.direction[0]), addNoise(p.direction[1])]
@@ -78,3 +100,5 @@ export const checkForBounces = (pos, distance, min, max) => {
         return distance
     }
 }
+
+

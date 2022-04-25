@@ -2,13 +2,13 @@ import React from 'react'
 import './SkillBox.css'
 import { Paragraph, SubTitle } from '../Text'
 
-const SkillColumn = ({title_text, description_text, svg_icon, windowWidth}) => {
+const SkillColumn = ({title_text, svg_icon, headerMode}) => {
     return (
         <div className='SkillBox'>
     
             <img src = {svg_icon} className = 'svg_icon'/>
             {
-                windowWidth >= 1600 ?
+                headerMode === 1 ?
                 <SubTitle text = {title_text} />
                 : <Paragraph text = {title_text} />
             }

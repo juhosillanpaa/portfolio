@@ -1,10 +1,23 @@
 import {
     vector_add,
     distance,
+    multiply, vector_multiply,
+    length,
     get_unit_vector,
     get_free_direction_vector,
-    checkForBounces
+    checkForBounces,
+    get_noised_unit_direction_vector
 } from './vector_math.js'
+
+//const gravity = 0.5
+
+// gravity constant
+const G = 750
+//acceleration_resistance
+const R_acc = 0.9
+//motion_resistance
+const R_mot = 0.1
+
 
 const gravity = 0.5
 const CLOSE_D = 0.05
@@ -15,6 +28,9 @@ const gravity_n = 20
 const BLUE = 'rgb(79,134,139)'
 const WHITE = 'rgb(255,255,255)'
 const W_STROKE = 'rgba(255,255,255,0.5)'
+
+
+
 
 const calculateGravityForceValue = (distance, mode) => {
     if (mode == 'reverse'){
@@ -69,7 +85,16 @@ class Point {
         this.pixelTrail = []
         this.trailLength = 3
         this.extra = false
+        this.PIXIESprite = undefined
+        this.mass = 1
+        this.v = [0,0]
+        this.a = [0,0]
     }
+
+    setPIXIESprite(sprite){
+        this.PIXIESprite = sprite
+    }
+
     setDirection(dir){
         this.direction = dir
     }
@@ -119,6 +144,10 @@ class Point {
     }
     setSize(size){
         this.size = size
+        if (this.PIXIESprite != undefined){
+            this.PIXIESprite.width = size
+            this.PIXIESprite.height = size
+        }
     }
     connectTo(connected){
         this.connected = connected
@@ -165,26 +194,8 @@ class Point {
         this.activate()
         this.target = new_target
     }
-    /*
-    fadeTrail(){
-        if (this.trail.length > 0){
-            this.trail.pop()
-        }
-    }
-    addToTrail(point){
-        this.pixelTrail.unshift(point)
-        if (this.pixelTrail.length > this.trailLength){
-            this.pixelTrail.pop()
-        }
 
-    }
-    updateTrail(){
-        this.trail.unshift([this.x, this.y])
-        if (this.trail.length > this.trailLength){
-            this.trail.pop()
-        }
 
-    }*/
 
     updateOrbitPosition(){
         //return
@@ -198,9 +209,31 @@ class Point {
         let d_vec = get_free_direction_vector(this)
         return d_vec
     }
+   
+    updateValues(t){
+        //First update the position based on the current values
+        // then calculate new speed and velocity values
+        if (this.stop){return}
+        
+        //calculate the location after travelling delta time
+        // dx = vt + 0.5*at^2
+        let dist = vector_add( multiply(this.v, t), multiply(this.a, 0.5*t*t) )  
+        this.x += dist[0]
+        this.y += dist[1]
 
+        // calculate end velocity and take "motion resistance" into account (or points will never find targets)
+        // v = v0 + at
+        this.v = vector_add(this.v, multiply(this.a, t))
+        this.v = multiply(this.v, 1 - R_mot)
 
-    updatePosition(width, height){
+        //Calculate forces and accelerations
+        // F = X * m/r^2       , where X is constant and m is the mass of item
+        // here we use reverse  => r^2 => 1 / sqrt(r)
+        let vec = [this.target[0] - this.x, this.target[1] - this.y]
+        this.a = multiply(get_unit_vector(vec), G * this.mass * Math.sqrt( length(vec) ))
+    }
+
+    updatePosition(delta, width, height){
         //Calculate the new direction vector for the point
         if (this.stop){
             //this.fadeTrail()
@@ -247,17 +280,24 @@ class Point {
         } else return true
     }
 
-    update(width, height) {
+    update(delta, width, height) {
         if (this.active){
             if (this.useTargetGravity){
                 this.updateGravityToTarget()
                 this.slowVelocity()
             }
-            this.updatePosition(width, height)
+            this.updatePosition(delta, width, height)
             this.testStopFunction()
             return this.isAnimationPlaying()
         }
         return false
+    }
+
+    update_real(delta, width, height){
+        if (this.active){
+            this.updateValues(delta, width, height)
+            this.testStopFunction()
+        }
     }
 }
 

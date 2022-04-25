@@ -2,51 +2,17 @@
     height: 100vh;
     width: 100%;
     position: relative;
-    /*
-    background-image: url('../../images/forest3.jpg');
-    background-repeat: none;
+    background-repeat: no-repeat;
     background-size: cover;
-    */
-}
-.Landing-background-image{
-    width:100%;
-    min-height: 100%;
-    height:auto;
-    overflow: hidden;
-
+    background-color: rgba(200,200,200,1);
 }
 
-.Landing-image{
+.Landing-header-tag{
     position:absolute;
-    top: 50%;
-    right: 2%;
-    transform: translate(0%, -50%);
-    height: 600px;
-    z-index: 0 !important; 
-    opacity: 1;
-}
-
-.box{
-    display:none;
-    position:absolute;
-    border: 1px solid red;
-    left: 680px;
-    top: 55vh;
-    height:150px;
-    width: 530px;
-}
-
-@media only screen and (min-width: 1000px){
-    .Landing-image{
-        height: 600px;
-    }
-}
-
-@media only screen and (min-width: 1600px){
-    .Landing-image{
-        height: 800px;
-        right: 10%;
-    }
-
+    width: 0px;
+    height: 0px;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 

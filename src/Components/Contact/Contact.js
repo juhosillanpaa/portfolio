@@ -3,9 +3,7 @@ import { Paragraph } from '../Text'
 import { ReactComponent as Phone } from '../../Icons/phone-call.svg'
 import { ReactComponent as Email } from '../../Icons/mail.svg'
 import { ReactComponent as Linkedin } from '../../Icons/linkedin-app.svg'
-import linkedin from '../../images/LI-Logo.png'
 import './Contact.css'
-
 
 const Contact = () => {
     const [copied, setCopied ] = useState(false)
